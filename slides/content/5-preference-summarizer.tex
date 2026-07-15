@@ -1,0 +1,32 @@
+\subsection{Recurrent user preference}
+\begin{frame}{Stage 2 — Preference như một trạng thái recurrent}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.56\textwidth}\centering
+      \includegraphics[width=\textwidth]{recurrent_preference.png}
+    \end{column}
+    \begin{column}{0.4\textwidth}\small
+      Chia lịch sử thành các block có thứ tự:
+      \begin{equation*}
+        h_k=\mathrm{LLM}(\mathrm{summary}(B_k),h_{k-1}),\quad h_0=\varnothing.
+      \end{equation*}
+      \begin{itemize}
+        \item Block đầu tạo preference ban đầu.
+        \item Block sau đọc preference trước đó và cập nhật.
+        \item $h_k$ là văn bản, nên dễ inspect hơn embedding ẩn.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Một vòng cập nhật preference diễn ra thế nào?}
+  \begin{enumerate}
+    \item Lấy 3 item liên tiếp (paper chọn block size 3 trong implementation).
+    \item Mỗi item đã có title + visual description + item summary.
+    \item Prompt yêu cầu LLM chỉ tóm tắt sở thích, không lặp lại chi tiết item.
+    \item Kết quả trở thành context cho block kế tiếp.
+  \end{enumerate}
+  \vspace{0.25cm}\begin{block}{Trade-off}
+    Block nhỏ: cập nhật thường xuyên nhưng nhiều lần gọi model. Block lớn: ít call hơn nhưng prompt dài, dễ làm mờ sự thay đổi theo thời gian.
+  \end{block}
+\end{frame}
+

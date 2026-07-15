@@ -1,0 +1,40 @@
+\section{Bài toán và thiết kế tổng thể}
+\begin{frame}{Định nghĩa Sequential Multimodal Recommendation}
+  Với user $u$, lịch sử tương tác có thứ tự là
+  \begin{equation*}S_u=[I_u^1,I_u^2,\ldots,I_u^n].\end{equation*}
+  Mỗi item $I^i$ có mô tả text $W^i$ và ảnh $\mathcal{I}^i$. Với candidate $I_c$, mô hình cần ước lượng mức phù hợp:
+  \begin{equation}
+    g_u:I_c\rightarrow\mathbb{R},\qquad p(I_c\mid u,S_u).
+  \end{equation}
+  \begin{itemize}
+    \item Training: positive interaction ghép với negative samples.
+    \item Evaluation: phân loại candidate và xếp hạng top-$5$.
+    \item Điểm khác biệt: ngữ cảnh chứa cả thứ tự hành vi và tín hiệu thị giác.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Tại sao không đưa toàn bộ lịch sử ảnh vào MLLM?}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.46\textwidth}
+      \centering\textbf{Cách trực tiếp}\par\vspace{0.2cm}
+      \begin{tikzpicture}[node distance=0.35cm, every node/.style={font=\scriptsize}]
+        \node[draw,rounded corners,fill=orange!15] (h) {item$_1$ + image$_1$};
+        \node[draw,rounded corners,fill=orange!15,below=of h] (h2) {item$_2$ + image$_2$};
+        \node[draw,rounded corners,fill=orange!15,below=of h2] (h3) {\dots item$_n$ + image$_n$};
+        \node[draw,rounded corners,fill=red!12,right=1cm of h2] (m) {MLLM};
+        \draw[-{Latex}] (h.east)--(m.west);\draw[-{Latex}] (h2.east)--(m.west);\draw[-{Latex}] (h3.east)--(m.west);
+      \end{tikzpicture}
+    \end{column}
+    \begin{column}{0.46\textwidth}
+      \centering\textbf{Nút thắt}\par\vspace{0.2cm}
+      \small
+      \begin{itemize}
+        \item Context tăng theo số item và số image.
+        \item Mất ổn định khi prompt rất dài.
+        \item Khó giữ temporal order và liên kết item–image.
+      \end{itemize}
+      \vspace{0.15cm}\textcolor{Logo1}{\textbf{Giải pháp:}} item summarization + recurrent preference state.
+    \end{column}
+  \end{columns}
+\end{frame}
+

@@ -1,0 +1,20 @@
+\section{Phê bình và giới hạn}
+\begin{frame}{Điều paper làm tốt}
+  \begin{itemize}
+    \item Đặt đúng giao điểm của ba vấn đề: đa phương thức, tuần tự và MLLM.
+    \item Chuyển image thành text để giải quyết context dài bằng một cơ chế đơn giản, dễ triển khai.
+    \item Recurrent prompt tạo ra intermediate preference có thể đọc và phân tích.
+    \item So sánh đa dataset, nhiều nhóm baseline, có ablation và parameter analysis.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Các giới hạn cần hỏi thêm}
+  \begin{itemize}
+    \item \textbf{Information bottleneck:} mọi visual cue cuối cùng bị nén qua generated text summary.
+    \item \textbf{Chi phí inference:} mỗi block cần gọi LLM; history dài làm tăng số lần gọi và độ trễ.
+    \item \textbf{Evaluation gap:} paper chứng minh offline metrics, chưa chứng minh latency, cost hoặc online user satisfaction.
+    \item \textbf{Reproducibility gap:} code checkout hiện tại có hyperparameter khác paper, nên cần log rõ cấu hình để tái hiện.
+    \item \textbf{Calibration:} xác suất yes/(yes+no) phụ thuộc tokenization và calibration của MLLM, chưa phải xác suất tương tác tuyệt đối.
+  \end{itemize}
+\end{frame}
+

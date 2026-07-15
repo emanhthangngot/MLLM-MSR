@@ -1,0 +1,45 @@
+\begin{frame}{Ablation: bỏ một thành phần thì chuyện gì xảy ra?}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.5\textwidth}\centering
+      \includegraphics[width=\textwidth]{ablation_variants.png}
+    \end{column}
+    \begin{column}{0.45\textwidth}\small
+      \textbf{MLLM-MSR\textsubscript{R}} — direct inference trên toàn bộ history:
+      \begin{itemize}\item prompt dài hơn;\item bỏ qua cập nhật state theo block;\item AUC thấp hơn model đầy đủ.\end{itemize}
+      \textbf{MLLM-MSR\textsubscript{I}} — bỏ image summarization:
+      \begin{itemize}\item preference inference chỉ còn text;\item mất visual style;\item kết quả giảm dù recommender vẫn nhận image candidate.\end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Parameter analysis: block size và context length}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.47\textwidth}\centering\small
+      \textbf{Block size}\par\vspace{0.1cm}
+      \resizebox{0.96\linewidth}{!}{\begin{tikzpicture}[x=0.7cm,y=1.8cm]
+        \draw[->] (0,0)--(5.3,0) node[right,font=\scriptsize]{block};
+        \draw[->] (0,0)--(0,1.1) node[above,font=\scriptsize]{AUC};
+        \draw[Logo1,thick] (0.4,0.35)--(1.4,0.65)--(2.4,0.82)--(3.4,0.79)--(4.4,0.58);
+        \foreach \x/\v in {0.4/0.35,1.4/0.65,2.4/0.82,3.4/0.79,4.4/0.58} {\fill[Logo1] (\x,\v) circle (1.5pt);}
+        \node[font=\scriptsize,align=center] at (2.5,-0.18) {quá nhỏ: thiếu context\\quá lớn: prompt dài};
+      \end{tikzpicture}}
+    \end{column}
+    \begin{column}{0.47\textwidth}\centering\small
+      \textbf{Preference summary length}\par\vspace{0.1cm}
+      \resizebox{0.96\linewidth}{!}{\begin{tikzpicture}[x=0.7cm,y=1.8cm]
+        \draw[->] (0,0)--(5.3,0) node[right,font=\scriptsize]{context};
+        \draw[->] (0,0)--(0,1.1) node[above,font=\scriptsize]{metric};
+        \draw[Logo2,thick] plot coordinates {(0.4,0.25)(1.4,0.48)(2.4,0.78)(3.4,0.8)(4.4,0.8)};
+        \foreach \x/\v in {0.4/0.25,1.4/0.48,2.4/0.78,3.4/0.8,4.4/0.8} {\fill[Logo2] (\x,\v) circle (1.5pt);}
+        \node[font=\scriptsize,align=center] at (2.5,-0.18) {ngắn: mất thông tin\\đủ dài: hiệu năng ổn định};
+      \end{tikzpicture}}
+    \end{column}
+  \end{columns}
+  \vspace{0.15cm}\scriptsize Các đường cong là sơ đồ diễn giải xu hướng trong Figure 5–6 của paper, không phải số liệu tái vẽ chính xác.
+\end{frame}
+
+\begin{frame}{Qualitative case: preference summary giúp giải thích dự đoán}
+  \includegraphics[width=\textwidth]{qualitative_case_01.png}
+  \vspace{0.1cm}\scriptsize
+  Ví dụ trong paper: preference tóm tắt được anime/manga/game, phong cách Nhật–Trung, màu sắc sống động và thiết kế nhân vật chi tiết; candidate có cover hoạt hình được dự đoán `YES`.
+\end{frame}

@@ -1,0 +1,25 @@
+\section{Đối chiếu với implementation trong repo}
+\begin{frame}{Paper \texorpdfstring{$\leftrightarrow$}{<->} code repo}
+  \begin{table}\centering\scriptsize
+    \begin{tabular}{p{2.9cm}p{6.9cm}}\toprule
+      \textbf{Khối trong paper} & \textbf{File trong repo}\\\midrule
+      Item image summary & \texttt{Inference/microlens/}\texttt{image\_summary.py} — tạo mô tả ảnh bằng LLaVA.\\
+      Recurrent preference & \texttt{Inference/microlens/}\texttt{preferece\_inference\_recurrent.py} — chunk 3 item, cập nhật summary bằng Llama 3.\\
+      Dataset construction & \texttt{train/microlens/}\texttt{dataset\_create.py}, \texttt{test/microlens/}\texttt{multi\_col\_dataset.py}.\\
+      MLLM SFT & \texttt{train/microlens/}\texttt{train\_llava\_sft.py} — LLaVA + LoRA + PyTorch Lightning.\\
+      Evaluation & \texttt{test/microlens/}\texttt{test\_with\_llava\_sft.py}.\\\bottomrule
+    \end{tabular}
+  \end{table}
+  \vspace{0.15cm}\scriptsize\textcolor{Logo1}{Lưu ý:} đây là đối chiếu implementation trong repo, không thay thế thông số được báo cáo trong paper.
+\end{frame}
+
+\begin{frame}{Một số sai khác cần ghi nhớ khi tái hiện}
+  \begin{itemize}
+    \item Paper báo cáo LoRA rank 8, 10 epochs và max length 512; file training hiện tại trong repo đặt rank 16, 4 epochs và max length 1024.
+    \item Paper mô tả ba dataset: MicroLens, Amazon-Baby, Amazon-Game; repo hiện có dữ liệu xử lý cho Baby và Video Games cùng các script riêng.
+    \item README có một số đường dẫn script cũ; khi chạy cần dùng path thực tế dưới \texttt{MLLM-MSR/train}, \texttt{MLLM-MSR/test} và \texttt{Inference/microlens}.
+  \end{itemize}
+  \begin{block}{Bài học tái lập}
+    Phải phân biệt “con số trong paper” với “cấu hình của code checkout hiện tại”; nếu không, kết quả chạy lại không nhất thiết khớp bảng báo cáo.
+  \end{block}
+\end{frame}

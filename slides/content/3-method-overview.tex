@@ -1,0 +1,30 @@
+\section{Phương pháp MLLM-MSR}
+\begin{frame}{Toàn cảnh pipeline MLLM-MSR}
+  \centering\includegraphics[width=0.78\textwidth]{paper_framework.png}
+  \vspace{0.08cm}\scriptsize
+  \textbf{Stage 1:} item text/image $\rightarrow$ item summaries $\rightarrow$ recurrent user preference.\quad
+  \textbf{Stage 2:} final preference + candidate text/image $\rightarrow$ MLLM recommender $\rightarrow$ yes/no.
+\end{frame}
+
+\begin{frame}{Hai stage, hai vai trò của mô hình ngôn ngữ}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.47\textwidth}
+      \begin{block}{Multimodal User Preferences Inference}
+        \begin{enumerate}
+          \item MLLM tóm tắt thông tin từng item.
+          \item LLM cập nhật preference theo từng block.
+          \item Output là văn bản giàu ngữ nghĩa, có thể đọc/giải thích.
+        \end{enumerate}
+      \end{block}
+    \end{column}
+    \begin{column}{0.47\textwidth}
+      \begin{block}{Tuning MLLM-based Recommender}
+        \begin{enumerate}
+          \item Đưa preference, item text và image vào prompt.
+          \item SFT trên interaction labels.
+          \item Chỉ sinh `yes` hoặc `no`; lấy xác suất token đầu tiên.
+        \end{enumerate}
+      \end{block}
+    \end{column}
+  \end{columns}
+\end{frame}

@@ -1,0 +1,40 @@
+\documentclass[aspectratio=169]{beamer}
+\input{preamble/packages}
+\input{preamble/settings}
+\graphicspath{{img/}}
+\input{content/0-title}
+
+\begin{document}
+\begin{frame}\titlepage\end{frame}
+\begin{frame}{Mục lục}\setcounter{tocdepth}{2}\tableofcontents\end{frame}
+\input{content/1-intro}
+\input{content/2-problem}
+\input{content/3-method-overview}
+\input{content/4-item-summarizer}
+\input{content/5-preference-summarizer}
+\input{content/6-recommender}
+\input{content/7-training}
+\input{content/8-implementation}
+\input{content/9-experiments}
+\input{content/10-results}
+\input{content/11-analysis}
+\input{content/12-limitations}
+\section{Kết luận}
+\begin{frame}{Ba thông điệp cần nhớ}
+  \begin{enumerate}
+    \item \textbf{Chuẩn hóa đa phương thức thành ngôn ngữ:} MLLM biến ảnh + text của từng item thành mô tả hợp nhất, dễ đưa vào chuỗi dài.
+    \item \textbf{Preference là trạng thái động:} recurrent summarization cập nhật sở thích qua từng block, thay vì ném toàn bộ lịch sử vào một prompt.
+    \item \textbf{MLLM cần được huấn luyện đúng nhiệm vụ:} SFT + LoRA biến LLaVA thành bộ dự đoán yes/no cho candidate item.
+  \end{enumerate}
+  \vspace{0.3cm}\centering\Large\textcolor{Logo1}{Multimodal + Sequential + Interpretable}
+\end{frame}
+\begin{frame}{Câu hỏi thảo luận với giảng viên}
+  \begin{enumerate}
+    \item Image-to-text có làm mất tín hiệu thị giác nào quan trọng cho recommendation không?
+    \item Có thể giữ trực tiếp image token nhưng vẫn kiểm soát được chuỗi lịch sử dài bằng memory/attention hiệu quả hơn không?
+    \item Điểm số yes/no có đủ để xếp hạng hàng nghìn candidate item trong production không?
+    \item Làm thế nào đánh giá chất lượng của preference summary độc lập với recommendation metric?
+  \end{enumerate}
+\end{frame}
+\begin{frame}[allowframebreaks]{Tài liệu tham khảo}\tiny\bibliographystyle{ieeetr}\bibliography{ref/ref}\end{frame}
+\end{document}

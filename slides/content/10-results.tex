@@ -1,0 +1,29 @@
+\section{Kết quả và phân tích}
+\begin{frame}{Kết quả chính — MLLM-MSR dẫn đầu ở cả classification và ranking}
+  \begin{table}\centering\tiny
+    \begin{tabular}{lccc|ccc|ccc}\toprule
+      & \multicolumn{3}{c|}{MicroLens} & \multicolumn{3}{c|}{Video-Games} & \multicolumn{3}{c}{Amazon-Baby}\\
+      Model & AUC & HR@5 & MRR@5 & AUC & HR@5 & MRR@5 & AUC & HR@5 & MRR@5\\\midrule
+      LLaVA & 52.75 & 28.21 & 17.33 & 53.57 & 33.24 & 18.73 & 55.86 & 34.82 & 20.96\\
+      TALLREC & 81.25 & 71.23 & 58.22 & 81.79 & 72.36 & 57.38 & 82.16 & 74.31 & 60.15\\
+      \textbf{MLLM-MSR} & \textbf{83.17} & \textbf{78.23} & \textbf{60.38} & \textbf{84.39} & \textbf{77.42} & \textbf{63.25} & \textbf{85.69} & \textbf{79.58} & \textbf{63.77}\\\bottomrule
+    \end{tabular}
+    \caption{Trích các baseline quan trọng từ Table 3 của paper \cite{ye2025mllmmsr}.}
+  \end{table}
+  \vspace{0.15cm}\small
+  \begin{itemize}
+    \item So với TALLREC, MLLM-MSR thêm image signal và preference inference recurrent.
+    \item So với LLaVA chưa fine-tune, task-specific SFT là khác biệt rất lớn.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Đọc kết quả theo từng nhóm baseline}
+  \begin{enumerate}
+    \item \textbf{SR cơ bản:} có sequence nhưng thiếu rich multimodal context.
+    \item \textbf{Multimodal graph:} có image/text nhưng không mô hình hóa temporal dynamics đủ mạnh.
+    \item \textbf{LLM text-only:} hiểu semantic tốt nhưng không nhìn thấy visual style.
+    \item \textbf{MLLM-MSR:} kết hợp cả ba năng lực — modality fusion, sequence modeling và task-specific tuning.
+  \end{enumerate}
+  \vspace{0.25cm}\centering\large\textcolor{Logo1}{Điểm mạnh không đến từ một module đơn lẻ, mà từ sự ghép đúng các inductive bias.}
+\end{frame}
+

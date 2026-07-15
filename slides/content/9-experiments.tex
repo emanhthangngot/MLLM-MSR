@@ -1,0 +1,43 @@
+\section{Thực nghiệm}
+\begin{frame}{Datasets và thống kê}
+  \begin{table}\centering\scriptsize
+    \begin{tabular}{lrrr}\toprule
+      & MicroLens & Amazon-Baby & Amazon-Game\\\midrule
+      User & 25,411 & 41,081 & 38,808\\
+      Item & 20,276 & 14,393 & 13,379\\
+      Interaction & 223,263 & 400,876 & 352,136\\
+      Avg. sequence length & 11.35 & 13.65 & 13.23\\
+      Sparsity & 99.96\% & 99.93\% & 99.93\%\\\bottomrule
+    \end{tabular}
+    \caption{Thống kê dataset theo paper \cite{ye2025mllmmsr}.}
+  \end{table}
+  \begin{itemize}\small
+    \item MicroLens: user–video interaction, video introduction và cover image.
+    \item Amazon: user–product interaction, product description và product image.
+    \item Loại user/item quá ít tương tác để bảo đảm history có độ dài tối thiểu.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Baseline và metrics}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.46\textwidth}\small
+      \textbf{Nhóm baseline}
+      \begin{itemize}
+        \item Basic SR: GRU4Rec, SASRec.
+        \item Multimodal: MGAT, MMGCN.
+        \item Multimodal-enhanced SR: GRU4RecF, SASRecF, MMSR, Trans2D.
+        \item LLM-based: LLaVA w/o SFT, TALLREC.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.46\textwidth}\small
+      \textbf{Metrics}
+      \begin{itemize}
+        \item AUC: chất lượng phân biệt positive/negative.
+        \item HR@5: hit rate trong top 5.
+        \item MRR@5: vị trí của item đúng trong top 5.
+      \end{itemize}
+      \vspace{0.1cm}Paper dùng 5-fold cross-validation, nhiều random seeds và báo cáo confidence level 95\%.
+    \end{column}
+  \end{columns}
+\end{frame}
+

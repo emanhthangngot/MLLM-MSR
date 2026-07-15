@@ -1,0 +1,30 @@
+\section{Động lực và bối cảnh}
+\begin{frame}{Từ sequential recommendation đến MLLM-MSR}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.31\textwidth}\centering
+      \textbf{Sequential recommendation}\par\vspace{0.2cm}
+      \small Lịch sử tương tác có thứ tự: click, mua hoặc xem. Mục tiêu là dự đoán item tiếp theo dựa trên pattern theo thời gian.
+    \end{column}
+    \begin{column}{0.31\textwidth}\centering
+      \textbf{Multimodal recommendation}\par\vspace{0.2cm}
+      \small Một item không chỉ có ID/title mà còn có ảnh bìa, product image hoặc video cover.
+    \end{column}
+    \begin{column}{0.31\textwidth}\centering
+      \textbf{MLLM}\par\vspace{0.2cm}
+      \small Có khả năng nối image và language vào cùng không gian semantic — nhưng chưa tự nhiên hiểu dynamics của lịch sử dài.
+    \end{column}
+  \end{columns}
+  \vfill\centering\Large\textcolor{Logo1}{Câu hỏi: làm sao để MLLM vừa nhìn thấy item, vừa hiểu người dùng thay đổi theo thời gian?}
+\end{frame}
+
+\begin{frame}{Ba khoảng trống mà paper nhắm tới}
+  \begin{enumerate}
+    \item \textbf{Nhiều ảnh theo thứ tự:} đưa cả chuỗi image vào MLLM vừa tốn context vừa khó ghép đúng ảnh với item.
+    \item \textbf{Preference biến đổi:} user có thể chuyển từ một chủ đề/visual style sang chủ đề khác; một summary tĩnh dễ lỗi thời.
+    \item \textbf{MLLM chưa phải recommender:} model pretrained hiểu ảnh và chữ, nhưng chưa được tối ưu cho xác suất tương tác với candidate item.
+  \end{enumerate}
+  \vspace{0.25cm}\begin{block}{Trực giác của MLLM-MSR}
+    Nén mỗi item thành mô tả đa phương thức bằng ngôn ngữ, cập nhật user preference theo kiểu recurrent, rồi fine-tune một MLLM để dự đoán yes/no.
+  \end{block}
+\end{frame}
+

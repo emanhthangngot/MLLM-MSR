@@ -1,0 +1,26 @@
+\begin{frame}{SFT objective và LoRA}
+  \begin{equation}
+    \mathcal{L}=-\sum_{i=1}^{L}\log P(v_i\mid v_{<i},\mathcal{I}).
+  \end{equation}
+  \begin{itemize}
+    \item $v_i$: token thứ $i$ của prompt/target sequence; $\mathcal{I}$: image candidate.
+    \item Positive/negative interactions tạo supervision cho đáp án yes/no.
+    \item LoRA cập nhật ma trận hạng thấp thay vì toàn bộ trọng số MLLM — giảm chi phí fine-tuning và nguy cơ overfit.
+  \end{itemize}
+  \vspace{0.2cm}\begin{block}{Cấu hình paper}
+    LLaVA-v1.6-Mistral-7B; Llama-3-8B-Instruct cho preference summarization; LoRA rank 8, AdamW learning rate $2\times10^{-5}$, batch size 1, gradient accumulation 8, 10 epochs, max length 512.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Negative sampling và protocol học}
+  \begin{tikzpicture}[node distance=0.55cm, every node/.style={font=\small}]
+    \node[draw,rounded corners,fill=green!15,minimum width=2.2cm] (p) {Positive item};
+    \node[draw,rounded corners,fill=red!12,below=of p,minimum width=2.2cm] (n) {Negative items};
+    \node[draw,rounded corners,fill=orange!18,right=1.3cm of p,minimum width=3cm] (q) {Preference + item + image};
+    \node[draw,rounded corners,fill=blue!12,right=1.3cm of q,minimum width=2.4cm] (o) {YES / NO};
+    \draw[-{Latex}] (p)--(q);\draw[-{Latex}] (n)--(q);\draw[-{Latex}] (q)--(o);
+  \end{tikzpicture}
+  \vspace{0.35cm}\small
+  Training dùng tỷ lệ positive:negative = 1:1; evaluation dùng 1:20. Candidate set được chuẩn hóa để so sánh công bằng giữa các baseline.
+\end{frame}
+

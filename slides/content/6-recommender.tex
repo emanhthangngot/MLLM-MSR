@@ -1,0 +1,24 @@
+\section{MLLM recommender và fine-tuning}
+\begin{frame}{Từ preference đến quyết định yes/no}
+  \centering\includegraphics[width=0.9\textwidth]{recommender_training.png}
+  \vspace{0.1cm}\small
+  Prompt gồm: user preference cuối cùng + lịch sử cần thiết + title candidate + cover image candidate. MLLM được yêu cầu chỉ sinh một nhãn `YES` hoặc `NO` để loại bỏ phần giải thích ngoài ý muốn.
+\end{frame}
+
+\begin{frame}{Xác suất tương tác từ token đầu tiên}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.55\textwidth}
+      Với hai token đầu ra `yes` và `no`, paper định nghĩa:
+      \begin{equation}
+        p=\frac{p(\text{yes})}{p(\text{yes})+p(\text{no})}.
+      \end{equation}
+      \small Đây là điểm liên tục để phân loại hoặc xếp hạng candidate, dù visible output chỉ là yes/no.
+    \end{column}
+    \begin{column}{0.38\textwidth}
+      \begin{block}{Điểm đáng chú ý}
+        Không thiết kế ranking head riêng. Paper tận dụng next-token probability của MLLM sau khi đã đưa modality và preference vào prompt.
+      \end{block}
+    \end{column}
+  \end{columns}
+\end{frame}
+

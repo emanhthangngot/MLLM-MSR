@@ -1,0 +1,40 @@
+\subsection{Item summarization}
+\begin{frame}{Stage 1 — Tóm tắt item đa phương thức}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.34\textwidth}\centering
+      \begin{tikzpicture}[node distance=0.35cm, every node/.style={font=\scriptsize}]
+        \node[draw,rounded corners,fill=blue!12] (t) {Title / text};
+        \node[draw,rounded corners,fill=green!12,below=of t] (i) {Image};
+        \node[draw,rounded corners,fill=orange!20,right=1cm of t] (m) {MLLM};
+        \node[draw,rounded corners,fill=cyan!15,right=1cm of m] (s) {Item summary};
+        \draw[-{Latex}] (t)--(m);\draw[-{Latex}] (i)--(m);\draw[-{Latex}] (m)--(s);
+      \end{tikzpicture}
+    \end{column}
+    \begin{column}{0.59\textwidth}\small
+      \begin{enumerate}
+        \item Xử lý text summary và image description bằng prompt riêng để khai thác đủ từng modality.
+        \item Cân chỉnh độ dài output để text không lấn át image description.
+        \item Dùng fusion prompt để hợp nhất thành một mô tả item bằng ngôn ngữ.
+      \end{enumerate}
+      \begin{block}{Ý nghĩa thiết kế}
+        Biến bài toán “nhiều image theo thứ tự” thành “chuỗi mô tả item”, phù hợp với năng lực xử lý text dài của LLM.
+      \end{block}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Preliminary study: image summary có giữ được tín hiệu?}
+  \small Paper dùng GRU4Rec để so sánh input là image summary của LLaVA với feature VGG19.
+  \begin{table}\centering
+    \begin{tabular}{lccc}\toprule
+      Input & MicroLens & Amazon-Baby & Amazon-Game\\\midrule
+      Image Summary & \textbf{0.7281} & \textbf{0.7318} & 0.7451\\
+      VGG19 Features & 0.7154 & 0.7383 & \textbf{0.7532}\\\bottomrule
+    \end{tabular}
+    \caption{AUC của GRU4Rec với hai loại input \cite{ye2025mllmmsr}.}
+  \end{table}
+  \vspace{0.2cm}\begin{block}{Kết luận thận trọng}
+    Image-to-text summary bảo toàn đủ semantic signal để cạnh tranh với feature trực tiếp ở preliminary study; đây là bằng chứng động lực, không phải chứng minh lossless.
+  \end{block}
+\end{frame}
+

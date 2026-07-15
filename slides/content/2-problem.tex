@@ -3,9 +3,9 @@
   Với user $u$, lịch sử tương tác có thứ tự là
   \begin{equation*}S_u=[I_u^1,I_u^2,\ldots,I_u^n].\end{equation*}
   Mỗi item $I^i$ có mô tả text $W^i$ và ảnh $\mathcal{I}^i$. Với candidate $I_c$, mô hình cần ước lượng mức phù hợp:
-  \begin{equation}
+  \begin{equation*}
     g_u:I_c\rightarrow\mathbb{R},\qquad p(I_c\mid u,S_u).
-  \end{equation}
+  \end{equation*}
   \begin{itemize}
     \item Training: positive interaction ghép với negative samples.
     \item Evaluation: phân loại candidate và xếp hạng top-$5$.
@@ -37,4 +37,3 @@
     \end{column}
   \end{columns}
 \end{frame}
-

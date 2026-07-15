@@ -1,5 +1,5 @@
 \begin{frame}{SFT objective và LoRA}
-  \begin{equation}
+  \begin{equation}\tag{2}
     \mathcal{L}=-\sum_{i=1}^{L}\log P(v_i\mid v_{<i},\mathcal{I}).
   \end{equation}
   \begin{itemize}
@@ -8,7 +8,7 @@
     \item LoRA cập nhật ma trận hạng thấp thay vì toàn bộ trọng số MLLM — giảm chi phí fine-tuning và nguy cơ overfit.
   \end{itemize}
   \vspace{0.2cm}\begin{block}{Cấu hình paper}
-    LLaVA-v1.6-Mistral-7B; Llama-3-8B-Instruct cho preference summarization; LoRA rank 8, AdamW learning rate $2\times10^{-5}$, batch size 1, gradient accumulation 8, 10 epochs, max length 512.
+    LLaVA-v1.6-Mistral-7B; Llama-3-8B-Instruct cho preference summarization; LoRA rank 8, AdamW learning rate $2\times10^{-5}$, batch size 1, gradient accumulation 8, 10 epochs, max length 512. Đánh số Eq theo paper: (2).
   \end{block}
 \end{frame}
 

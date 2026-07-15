@@ -21,7 +21,7 @@
         \draw[->] (0,0)--(0,1.1) node[above,font=\scriptsize]{AUC};
         \draw[Logo1,thick] (0.4,0.35)--(1.4,0.65)--(2.4,0.82)--(3.4,0.79)--(4.4,0.58);
         \foreach \x/\v in {0.4/0.35,1.4/0.65,2.4/0.82,3.4/0.79,4.4/0.58} {\fill[Logo1] (\x,\v) circle (1.5pt);}
-        \node[font=\scriptsize,align=center] at (2.5,-0.18) {quá nhỏ: thiếu context\\quá lớn: prompt dài};
+        \node[font=\scriptsize,align=center] at (2.5,-0.18) {nhỏ: thiếu context\\lớn: prompt dài};
       \end{tikzpicture}}
     \end{column}
     \begin{column}{0.47\textwidth}\centering\small
@@ -31,7 +31,7 @@
         \draw[->] (0,0)--(0,1.1) node[above,font=\scriptsize]{metric};
         \draw[Logo2,thick] plot coordinates {(0.4,0.25)(1.4,0.48)(2.4,0.78)(3.4,0.8)(4.4,0.8)};
         \foreach \x/\v in {0.4/0.25,1.4/0.48,2.4/0.78,3.4/0.8,4.4/0.8} {\fill[Logo2] (\x,\v) circle (1.5pt);}
-        \node[font=\scriptsize,align=center] at (2.5,-0.18) {ngắn: mất thông tin\\đủ dài: hiệu năng ổn định};
+        \node[font=\scriptsize,align=center] at (2.5,-0.18) {ngắn: mất thông tin\\đủ dài: ổn định};
       \end{tikzpicture}}
     \end{column}
   \end{columns}
@@ -39,7 +39,7 @@
 \end{frame}
 
 \begin{frame}{Qualitative case: preference summary giúp giải thích dự đoán}
-  \includegraphics[width=\textwidth]{qualitative_case_01.png}
-  \vspace{0.1cm}\scriptsize
+  \includegraphics[width=0.96\textwidth]{qualitative_case_01.png}
+  \par\vspace{0.1cm}\scriptsize
   Ví dụ trong paper: preference tóm tắt được anime/manga/game, phong cách Nhật–Trung, màu sắc sống động và thiết kế nhân vật chi tiết; candidate có cover hoạt hình được dự đoán `YES`.
 \end{frame}
